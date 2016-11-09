@@ -1,0 +1,62 @@
+<web-app id="WebApp_ID" version="2.4" 
+	xmlns="http://java.sun.com/xml/ns/j2ee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+  <display-name>Hospital Application</display-name>
+  
+  <servlet>
+  	<servlet-name>apply</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <servlet-mapping>
+ 	<servlet-name>apply</servlet-name>
+    <url-pattern>*.htm</url-pattern>
+  </servlet-mapping>
+
+  <context-param>
+	<param-name>contextConfigLocation</param-name>
+	<param-value>/WEB-INF/apply-servlet.xml</param-value>
+  </context-param>
+  
+  <listener>
+    <listener-class>
+      org.springframework.web.context.ContextLoaderListener
+    </listener-class>
+  </listener>
+  
+  <error-page>
+	<error-code>404</error-code>
+	<location>/WEB-INF/pages/404.jsp</location>
+  </error-page>
+
+  <error-page>
+	<exception-type>java.lang.Exception</exception-type>
+	<location>/WEB-INF/pages/404.jsp</location>
+  </error-page>
+  <!-- Filters -->
+  <!-- SessionFilter to validate the application url -->
+  <filter>
+    <filter-name>SessionFilter</filter-name>
+    <filter-class>com.mankraft.filters.SessionFilter</filter-class>
+    <init-param>
+    <param-name>allowedWithSession</param-name>
+    <param-value>/appointment.htm
+                /appointmeffgfdft.htm
+    
+    
+    </param-value>
+    </init-param>
+    <init-param>
+    <param-name>allowedWithoutSession</param-name>
+    <param-value>/appointment.htm</param-value>
+    </init-param>
+  </filter>
+  
+  <session-config>
+  <session-timeout>20</session-timeout>
+  </session-config>
+  </web-app>
